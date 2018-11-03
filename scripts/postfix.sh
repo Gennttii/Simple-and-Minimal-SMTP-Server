@@ -34,7 +34,22 @@ config_postfix() {
 	myorigin = $mydomain
 	myhostname = $myhostname
 	mydestination = localhost
+
 	mynetworks = $mynetworks_file
+	
+	# TLS settings
+	smtp_tls_security_level = may
+	smtpd_tls_security_level = may
+	smtp_tls_note_starttls_offer = yes
+	smtpd_tls_loglevel = 1
+	smtpd_tls_received_header = yes
+	## Disable SSLv2/3 as they are vulnerable
+	#smtpd_tls_protocols = !SSLv2, !SSLv3
+	#smtp_tls_protocols = !SSLv2, !SSLv3
+	## Insist on stronger ciphers
+	#smtpd_tls_ciphers = high
+	#smtp_tls_ciphers = high
+	
 	virtual_alias_domains = $domains_file
 	virtual_alias_maps = hash:$aliases_file
 	EOF

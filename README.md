@@ -48,12 +48,12 @@ Obviously, the port **25** has to be open in the firewall.
 
 Configuration files are on the directory 'config/'. There you can add
 more email domains, aliases, or allow hosts/networks to use the server
-for relaying (sending) emails. You need to run `ds exec postfix
-reload` after making changes to the config files. If you add or remove
-aliases (on `virtual_alias_maps.cf`) you also need to run `ds exec
-postmap /etc/postfix/config/virtual_alias_maps.cf` (which will
-regenerate the file `virtual_alias_maps.cf.db`).
+for relaying (sending) emails. You need to run `ds inject update.sh`
+after making changes to the config files.
 
+If you add a new email domain, you should also create a new DKIM key
+for it and add the corresponding configuration as a TXT record on the
+DNS server: `ds dkimkey add <email-domain>`
 
 ## Other commands
 
@@ -68,4 +68,5 @@ ds help
 ## Further readings and info
 
 - https://www.binarytides.com/postfix-mail-forwarding-debian/
+- https://www.linuxbabe.com/mail-server/setting-up-dkim-and-spf
 - https://blog.edmdesigner.com/send-email-from-linux-command-line/

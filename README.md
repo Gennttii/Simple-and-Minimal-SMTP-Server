@@ -21,7 +21,7 @@ configuration:
 ; mail for example.org
 $ORIGIN example.org.
 smtp    IN    A           123.45.67.89
-@       IN    MX    10    smtp
+@       IN    MX    1     smtp.example.org.
 @       IN    TXT         "v=spf1 mx -all"
 ```
 

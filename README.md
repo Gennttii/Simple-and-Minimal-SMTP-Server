@@ -43,6 +43,8 @@ Obviously, the port **25** has to be open in the firewall.
 
   - Build image, create the container and configure it: `ds make`
 
+  - Get a letsencrypt SSL certificate with: `ds get-ssl-cert`
+
 
 ## Postfix configuration
 

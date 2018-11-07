@@ -34,8 +34,8 @@ Obviously, the port **25** has to be open in the firewall.
 ## Installation
 
   - First install `ds` and `wsproxy`:
-        + https://github.com/docker-scripts/ds#installation
-        + https://github.com/docker-scripts/wsproxy#installation
+      + https://github.com/docker-scripts/ds#installation
+      + https://github.com/docker-scripts/wsproxy#installation
 
   - Then get the scripts from github: `ds pull postfix`
 

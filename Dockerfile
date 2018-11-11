@@ -7,4 +7,5 @@ RUN DEBIAN_FRONTEND=noninteractive \
         postfix \
         postfix-policyd-spf-python \
         opendkim \
-        opendkim-tools
+        opendkim-tools \
+        swaks

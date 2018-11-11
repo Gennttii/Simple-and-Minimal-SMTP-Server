@@ -18,11 +18,9 @@ To send and receive emails, DNS has to be configured properly. For
 each email domain you need something like this on the DNS
 configuration:
 ```
-; mail for example.org
-$ORIGIN example.org.
-smtp    IN    A           123.45.67.89
-@       IN    MX    1     smtp.example.org.
-@       IN    TXT         "v=spf1 mx -all"
+smtp.example.org.    IN    A           10.11.12.13
+example.org.         IN    MX    1     smtp.example.org.
+example.org.         IN    TXT         "v=spf1 mx -all"
 ```
 
 
@@ -46,6 +44,8 @@ Obviously, the port **25** has to be open in the firewall.
   - Build image, create the container and configure it: `ds make`
 
   - Get a letsencrypt SSL certificate with: `ds get-ssl-cert`
+
+  - For more details see [INSTALL.md](INSTALL.md)
 
 
 ## Postfix configuration

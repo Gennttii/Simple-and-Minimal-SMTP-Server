@@ -9,13 +9,15 @@ postconf \
     "mydomain = $mydomain" \
     "myorigin = $mydomain" \
     "mydestination = localhost" \
-    "myhostname = $myhostname"
+    "myhostname = $myhostname" \
+    "disable_vrfy_command = yes"
 
 # TLS settings
 postconf \
     "smtp_tls_security_level = may" \
     "smtpd_tls_security_level = may" \
     "smtp_tls_note_starttls_offer = yes" \
+    "smtp_tls_loglevel = 1" \
     "smtpd_tls_loglevel = 1" \
     "smtpd_tls_received_header = yes"
 
@@ -44,9 +46,11 @@ EOF
 
 # virtual_alias_maps
 [[ -f $aliases_file ]] || cat <<EOF > $aliases_file
-root@$MAIL_DOMAIN    $FORWARD_ADDRESS
-info@$MAIL_DOMAIN    $FORWARD_ADDRESS
-admin@$MAIL_DOMAIN   $FORWARD_ADDRESS
+postmaster@$MAIL_DOMAIN    $FORWARD_ADDRESS
+abuse@$MAIL_DOMAIN         $FORWARD_ADDRESS
+root@$MAIL_DOMAIN          $FORWARD_ADDRESS
+admin@$MAIL_DOMAIN         $FORWARD_ADDRESS
+info@$MAIL_DOMAIN          $FORWARD_ADDRESS
 
 ### Uncomment this to catch all email addresses of this domain.
 #@$MAIL_DOMAIN    $FORWARD_ADDRESS

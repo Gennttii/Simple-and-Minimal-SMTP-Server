@@ -293,6 +293,26 @@ reports from major ISPs about the usage of your email domain.
   ```
   Then click the button for checking the score.
 
+**Note:** Another way to send test emails (instead of `swaks`) is by
+using `curl` and a script `testmail.sh` with a content like this:
+```
+#!/bin/bash
+
+from_address='info@example.org'
+to_address='admin@example.org'
+cat << EOF | curl -v --ssl --upload-file - \
+                  --url 'smtp://smtp.example.org' \
+                  --mail-from $from_address \
+                  --mail-rcpt $to_address
+From: $from_address
+To: $to_address
+Subject: test $(date)
+
+Test message.
+EOF
+
+```
+
 
 ## Check the Mail Server
 

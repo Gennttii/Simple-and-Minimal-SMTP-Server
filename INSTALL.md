@@ -1,7 +1,7 @@
 
-# Building a Simple and Minimal SMTP Server
+# Simple and Minimal SMTP Server
 
-## Introduction
+## 1. Introduction
 
 Quite often web applications need to send email notifications. For
 example Moodle needs to notify students and teachers about various
@@ -35,7 +35,7 @@ can have accounts and use it daily, but just to support web
 applications (like Moodle) with sending notifications.
 
 
-## Sending Email From GMail SMTP Servers
+## 2. Sending Email From GMail SMTP Servers
 
 Before starting with building a SMTP server, let's see first the easy
 solution, in case this is sufficient for your needs.
@@ -86,7 +86,7 @@ EOF
 the script with your email address as an argument.
 
 
-## Minimal DNS Configuration
+## 3. Minimal DNS Configuration
 
 In order to build a mail server you need to own a domain (say
 `example.org`) and be able to customize its DNS records.
@@ -141,11 +141,11 @@ $ dig TXT example.org +short
 ```
 
 
-## Build a Postfix Container With Docker-Scripts
+## 4. Build a Postfix Container With Docker-Scripts
 
 It is easy to build a postfix container with docker-scripts.
 
-### Install Docker-Scripts
+### 4.1. Install Docker-Scripts
 
 ```
 sudo su
@@ -155,7 +155,7 @@ cd /opt/docker-scripts/ds/
 make install
 ```
 
-### Install Web-Server Proxy
+### 4.2. Install Web-Server Proxy
 
 - Get the scripts: `ds pull wsproxy`
 - Create a container directory: `ds init wsproxy @wsproxy`
@@ -165,7 +165,7 @@ make install
 We need `wsproxy` to get and manage letsencrypt SSL certificates for
 the `postfix` container.
 
-### Install Postfix
+### 4.3. Install Postfix
 
 - Get the scripts: `ds pull postfix`
 - Create a container directory: `ds init postfix @smtp.example.org`
@@ -173,7 +173,7 @@ the `postfix` container.
 - Build image, create the container and configure it: `ds make`
 - Get a letsencrypt SSL certificate: `ds get-ssl-cert`
 
-### Activate DKIM Key
+### 4.4. Activate DKIM Key
 
 DKIM keys are used by mail servers to sign the emails that they send,
 so that they cannot be changed in transit, and so that it can be
@@ -200,7 +200,7 @@ To check whether it has been activated or not, try the command:
 dig TXT mail._domainkey.example.org +short
 ```
 
-### Create a DMARC Record
+### 4.5. Create a DMARC Record
 
 DMARC is a standard that allows you to set policies on who can send
 email for your domain based on DKIM and SPF. For more details see
@@ -224,7 +224,7 @@ reports from major ISPs about the usage of your email domain.
   dig TXT _dmarc.example.org. +short
   ```
 
-## Test the SMTP Server
+## 5. Test the SMTP Server
 
 - Install `swaks`:
   ```
@@ -314,7 +314,7 @@ EOF
 ```
 
 
-## Check the Mail Server
+## 6. Check the Mail Server
 
 There are lots of tools and websites that help to check the
 configuration of a mail server (DNS settings, configuration, security
@@ -337,7 +337,7 @@ features, etc.) These are some of them:
   ```
 
 
-## Add Another Email Domain
+## 7. Add Another Email Domain
 
 The same smtp server can support more than one mail domains. If we
 want to add another mail domain, for example `example.com`, we have to
@@ -386,7 +386,7 @@ do these:
   ```
 
 
-## Using The SMTP Server
+## 8. Using The SMTP Server
 
 Different applications have different methods for configuring the SMTP
 server. Let's see how to send emails from cron jobs and from Moodle.
@@ -397,7 +397,7 @@ otherwise it will refuse to accept and send emails. After adding it on
 this list, run `ds inject update.sh` to update the configuration of
 the mail server.
 
-### Sending Emails From Cron Jobs
+### 8.1. Sending Emails From Cron Jobs
 
 Cron jobs (for example `logwatch`) send emails to `root` through
 `sendmail`. We can make it work with `ssmtp`. First install it with:
@@ -411,7 +411,7 @@ FromLineOverride=YES
 Test it with: `echo test | sendmail -v root`
 
 
-### Sending Emails From Moodle
+### 8.2. Sending Emails From Moodle
 
 If we search for `smtp` on the GUI menu for administration, we will
 find that the place for SMTP configuration is on `Dashboard > Site
@@ -429,7 +429,7 @@ moosh config-set smtpmaxbulk 100
 ```
 
 
-## References
+## 9. References
 
 - https://www.linux.com/learn/how-set-virtual-domains-and-virtual-users-postfix
 - https://tecadmin.net/send-email-smtp-server-linux-command-line-ssmtp/

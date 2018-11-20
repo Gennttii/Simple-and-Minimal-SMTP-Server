@@ -19,4 +19,5 @@ cmd_config() {
     done
 
     ds inject update.sh
+    ds get-ssl-cert
 }

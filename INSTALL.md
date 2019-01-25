@@ -120,7 +120,7 @@ should normally go to `example.org.db`). If you use some other system
 for managing your domain records, you should figure out how to do them
 properly on it. If you are starting from scratch and don't have yet a
 domain for the mail server, I would suggest trying this for managing
-its DNS configuration: https://github.com/docker-scripts/bind9
+its DNS configuration: https://gitlab.com/docker-scripts/bind9
 
 **Note:** On `bind9`, make sure to change the serial number on the
 configuration file and then restart the service: `systemctl restart
@@ -150,7 +150,7 @@ It is easy to build a postfix container with docker-scripts.
 ```
 sudo su
 apt install m4
-git clone https://github.com/docker-scripts/ds /opt/docker-scripts/ds
+git clone https://gitlab.com/docker-scripts/ds /opt/docker-scripts/ds
 cd /opt/docker-scripts/ds/
 make install
 ```

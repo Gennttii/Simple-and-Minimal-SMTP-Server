@@ -8,7 +8,6 @@ _EOF
 
 cmd_config() {
     ds inject ubuntu-fixes.sh
-    ds inject set_prompt.sh
 
     ds inject postfix.sh
     ds inject spf-policy.sh
